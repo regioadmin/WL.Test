@@ -1,0 +1,28 @@
+<f:layout name="Default" />
+
+<f:section name="Title">Edit detail "{detail.name}"</f:section>
+
+<f:section name="Content">
+	<f:form action="update" object="{detail}" name="detail">
+		<ol>
+			<li>
+				<label for="detail1">Detail1</label>
+				<f:form.textfield property="detail.detail1" id=detail.detail1" />
+			</li>
+
+			<li>
+				<label for="detail2">Detail2</label>
+				<f:form.textfield property="detail.detail2" id="detail.detail2" />
+			</li>
+
+			<li>
+				<label for="master">Master</label>
+				<f:form.textfield property="master.name" id="master.name" />
+			</li>
+
+			<li>
+				<f:form.submit value="Update"/>
+			</li>
+		</ol>
+	</f:form>
+</f:section>

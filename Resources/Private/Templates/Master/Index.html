@@ -1,0 +1,26 @@
+<f:layout name="Default" />
+
+<f:section name="Title">A list of masters</f:section>
+
+<f:section name="Content">
+	<f:if condition="{masters}">
+		<f:then>
+			<ul>
+				<f:for each="{masters}" as="master">
+					<li>
+						<f:link.action action="show" arguments="{master: master}">{master.name}</f:link.action>
+						<f:link.action action="edit" arguments="{master: master}">Edit</f:link.action>
+						<f:link.action action="edit" controller="detail" arguments="{detail: master.detail}">Detail</f:link.action>
+						<f:link.action action="delete" arguments="{master: master}">Delete</f:link.action>
+					</li>
+				</f:for>
+			</ul>
+		</f:then>
+		<f:else>
+			<p>No masters created yet.</p>
+		</f:else>
+	</f:if>
+
+	<a href="http://lamp/index.php/wl.test/masterdetail/edit?master%5B__identity%5D=b3cdedbd-c14a-4b0a-8b1c-acc548db11ed">sss</a>
+	<p><f:link.action action="new">Create a new master</f:link.action></p>
+</f:section>

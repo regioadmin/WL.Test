@@ -1,0 +1,30 @@
+<f:layout name="Default" />
+
+<f:section name="Title">New detail</f:section>
+
+<f:section name="Content">
+	<p>Just fill out the following form to create a new detail:</p>
+
+	<f:form action="create" name="newDetail">
+		<ol>
+			<li>
+				<label for="detail1">Detail1</label>
+				<f:form.textfield property="detail1" id="detail1" />
+			</li>
+		
+			<li>
+				<label for="detail2">Detail2</label>
+				<f:form.textfield property="detail2" id="detail2" />
+			</li>
+		
+			<li>
+				<label for="master">Master</label>
+				<f:form.textfield property="master" id="master" />
+			</li>
+		
+			<li>
+				<f:form.submit value="Create" />
+			</li>
+		</ol>
+	</f:form>
+</f:section>
