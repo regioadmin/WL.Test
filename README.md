@@ -1,2 +1,2 @@
-This is a Testpackage for Typo3/Flow
+This is a Testpackage for TYPO3/Flow showing the use of a "Data Transfer Object
 
