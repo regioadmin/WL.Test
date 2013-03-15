@@ -10,9 +10,10 @@ use TYPO3\Flow\Annotations as Flow;
 
 use TYPO3\Flow\Mvc\Controller\ActionController;
 use \WL\Test\Domain\Model\Master;
+use \WL\Test\Domain\Dto\Masterdetaildto;
 
 /**
- * Master controller for the WL.Test package 
+ * Master controller for the WL.Test package
  *
  * @Flow\Scope("singleton")
  */
@@ -23,6 +24,12 @@ class MasterController extends ActionController {
 	 * @var \WL\Test\Domain\Repository\MasterRepository
 	 */
 	protected $masterRepository;
+
+	/**
+	 * @Flow\Inject
+	 * @var \WL\Test\Domain\Repository\DetailRepository
+	 */
+	protected $detailRepository;
 
 	/**
 	 * Shows a list of masters
@@ -52,25 +59,37 @@ class MasterController extends ActionController {
 	}
 
 	/**
-	 * Adds the given new master object to the master repository
+	 * Adds the given new masterdetail to the repository
 	 *
-	 * @param \WL\Test\Domain\Model\Master $newMaster A new master to add
+	 * @param \WL\Test\Domain\Dto\Masterdetaildto $newMasterdetaildto
 	 * @return void
 	 */
-	public function createAction(Master $newMaster) {
-		$this->masterRepository->add($newMaster);
-		$this->addFlashMessage('Created a new master.');
-		$this->redirect('index');
+	public function createAction(Masterdetaildto $newMasterdetaildto) {
+
+		$modelMaster = $newMasterdetaildto->getMaster();
+		$this->masterRepository->add($modelMaster);
+
+		$modelDetail = $newMasterdetaildto->getDetail();
+		$modelDetail->setMaster($modelMaster);
+		$this->detailRepository->add($modelDetail);
+
+		$this->redirect('index', 'Master');
 	}
 
 	/**
 	 * Shows a form for editing an existing master object
 	 *
-	 * @param \WL\Test\Domain\Model\Master $master The master to edit
+	 * @param \WL\Test\Domain\Model\Master $master
+	 * @param \WL\Test\Domain\Model\Detail $detail
 	 * @return void
 	 */
-	public function editAction(Master $master) {
-		$this->view->assign('master', $master);
+	public function editAction(\WL\Test\Domain\Model\Master $master, \WL\Test\Domain\Model\Detail $detail) {
+		//\TYPO3\FLOW\var_dump($master);
+		//die();
+		$masterAndDetail = new \WL\Test\Domain\Dto\Masterdetaildto($master, $detail);
+		$this->view->assign('masterAndDetail', $masterAndDetail);
+
+
 	}
 
 	/**
