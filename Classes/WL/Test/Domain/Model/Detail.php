@@ -31,7 +31,7 @@ class Detail {
 	/**
 	 * The master
 	 * @var \WL\Test\Domain\Model\Master
-	 * @ORM\ManyToOne(inversedBy="detail", cascade={"remove"})
+	 * @ORM\OneToOne(inversedBy="detail", cascade={"remove"})
 	 */
 	protected $master;
 
