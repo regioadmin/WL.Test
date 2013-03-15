@@ -46,9 +46,7 @@ class MasterdetailController extends ActionController {
 	 * @return void
 	 */
 	public function initializeEditAction() {
-		//$this->arguments['objektwohnraumobjektdto']->setPropertyMappingConfiguration()->allowProperties('__identity');
-		//$commentConfiguration = $this->arguments['objektwohnraumobjektdto']->getPropertyMappingConfiguration();
-		//$commentConfiguration->allowAllProperties();
+		
 	}
 	/**
 	 * Shows a form for editing an existing objektwohnraumobjektdto object
