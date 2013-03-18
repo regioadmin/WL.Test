@@ -84,9 +84,13 @@ class MasterController extends ActionController {
 	 * @return void
 	 */
 	public function editAction(\WL\Test\Domain\Model\Master $master, \WL\Test\Domain\Model\Detail $detail) {
-		//\TYPO3\FLOW\var_dump($master);
-		//die();
+
+
 		$masterAndDetail = new \WL\Test\Domain\Dto\Masterdetaildto($master, $detail);
+		$masterAndDetail->setMaster($master);
+		$masterAndDetail->setDetail($detail);
+
+		\TYPO3\FLOW\var_dump($masterAndDetail);
 		$this->view->assign('masterAndDetail', $masterAndDetail);
 
 
@@ -95,12 +99,23 @@ class MasterController extends ActionController {
 	/**
 	 * Updates the given master object
 	 *
-	 * @param \WL\Test\Domain\Model\Master $master The master to update
+	 * aram \WL\Test\Domain\Model\Master $master The master to update
+	 * @param \WL\Test\Domain\Dto\Masterdetaildto $masterAndDetail
+	 * \WL\Test\Domain\Model\Master $master
 	 * @return void
 	 */
-	public function updateAction(Master $master) {
-		$this->masterRepository->update($master);
-		$this->addFlashMessage('Updated the master.');
+	public function updateAction(\WL\Test\Domain\Dto\Masterdetaildto $masterAndDetail) {
+
+
+		$modelDetail=$masterAndDetail->getDetail();
+		\TYPO3\FLOW\var_dump($modelDetail);
+		$this->detailRepository->update($modelDetail);
+
+		$modelMaster= new \WL\Test\Domain\Model\Master;
+		$modelMaster=$masterAndDetail->getMaster();
+		\TYPO3\FLOW\var_dump($modelMaster);
+		$this->masterRepository->update($modelMaster);
+
 		$this->redirect('index');
 	}
 
