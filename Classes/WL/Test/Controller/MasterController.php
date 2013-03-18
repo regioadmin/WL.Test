@@ -99,9 +99,7 @@ class MasterController extends ActionController {
 	/**
 	 * Updates the given master object
 	 *
-	 * aram \WL\Test\Domain\Model\Master $master The master to update
 	 * @param \WL\Test\Domain\Dto\Masterdetaildto $masterAndDetail
-	 * \WL\Test\Domain\Model\Master $master
 	 * @return void
 	 */
 	public function updateAction(\WL\Test\Domain\Dto\Masterdetaildto $masterAndDetail) {
