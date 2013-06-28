@@ -5,21 +5,26 @@
 <f:section name="Content">
 
 	<f:form action="update" object="{masterAndDetail}" objectName="masterAndDetail">
+
 		<ol>
 			<li>
-				<label for="master.name">Name</label>
-				<f:form.textfield property="master.name" />
-				<label for="detail.detail1">Detail1</label>
-				<f:form.textfield property="detail.detail1"  />
-				<label for="detail.detail2">Detail1</label>
-				<f:form.textfield property="detail.detail2" />
+				<label for="master.name">Master Name</label>
+				<f:form.textfield property="master.name" id="master.name"/>
+				<label for="detail.description">Description</label>
+				<f:form.textfield property="detail.description" id="detail.description" />
+				<label for="detail.amount">Amount</label>
+				<f:form.textfield property="detail.amount" id="detail.amount" value="{masterAndDetail.detail.amount->f:format.currency(decimalSeparator:',')}"/>
 			</li>
+				<f:form.hidden property="master" id="master"/>
+				<f:form.hidden property="detail" id="detail"/>
 
-
+				<f:form.hidden name="master_id" value="{masterAndDetail.master}"/>
+				<f:form.hidden name="detail_id" value="{masterAndDetail.detail}"/>
 
 			<li>
 				<f:form.submit value="Update"/>
 			</li>
 		</ol>
 	</f:form>
+<f:debug>{masterAndDetail}</f:debug>
 </f:section>
