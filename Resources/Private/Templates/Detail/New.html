@@ -8,20 +8,20 @@
 	<f:form action="create" name="newDetail">
 		<ol>
 			<li>
-				<label for="detail1">Detail1</label>
-				<f:form.textfield property="detail1" id="detail1" />
+				<label for="master.name">Name</label>
+				<f:form.textfield property="master.name" id="master.name" />
 			</li>
-		
+
 			<li>
-				<label for="detail2">Detail2</label>
-				<f:form.textfield property="detail2" id="detail2" />
+				<label for="description">Description</label>
+				<f:form.textfield property="description" id="description" />
 			</li>
-		
+
 			<li>
-				<label for="master">Master</label>
-				<f:form.textfield property="master" id="master" />
+				<label for="amount">Amount</label>
+				<f:form.textfield property="amount" id="amount" />
 			</li>
-		
+
 			<li>
 				<f:form.submit value="Create" />
 			</li>
