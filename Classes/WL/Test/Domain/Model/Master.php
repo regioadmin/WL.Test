@@ -18,6 +18,7 @@ class Master {
 
 	/**
 	 * The name
+	 * @Flow\Validate(type="NotEmpty")
 	 * @var string
 	 */
 	protected $name;
