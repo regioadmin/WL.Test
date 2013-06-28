@@ -19,7 +19,6 @@ class Detail {
 	/**
 	 * The master
 	 * @var \WL\Test\Domain\Model\Master
-	 * ORM\OneToOne( cascade={"persist","remove"},orphanRemoval=true) //neuer DS alter wird geloescht
 	 * @ORM\OneToOne(cascade={"persist","remove"})
 	 */
 	protected $master;
