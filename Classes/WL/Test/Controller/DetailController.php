@@ -67,7 +67,7 @@ class DetailController extends ActionController {
 	* @return void
 	*/
 	public function initializeEditAction() {
-		$this->arguments['detail']->getPropertyMappingConfiguration()->allowProperties('__identity');
+		//$this->arguments['detail']->getPropertyMappingConfiguration()->allowProperties('__identity');
 	}
 
 
@@ -89,6 +89,7 @@ class DetailController extends ActionController {
 	 */
 	public function updateAction(Detail $detail) {
 		$this->detailRepository->update($detail);
+
 		$this->addFlashMessage('Updated the detail.');
 		$this->redirect('index');
 	}

@@ -17,61 +17,60 @@ use Doctrine\ORM\Mapping as ORM;
 class Detail {
 
 	/**
-	 * The detail1
-	 * @var string
-	 */
-	protected $detail1;
-
-	/**
-	 * The detail2
-	 * @var string
-	 */
-	protected $detail2;
-
-	/**
 	 * The master
 	 * @var \WL\Test\Domain\Model\Master
-	 * @ORM\OneToOne(inversedBy="detail", cascade={"remove"})
+	 * ORM\OneToOne( cascade={"persist","remove"},orphanRemoval=true) //neuer DS alter wird geloescht
+	 * @ORM\OneToOne(cascade={"persist","remove"})
 	 */
 	protected $master;
 
 	/**
-	 * Get the Detail's detail1
-	 *
-	 * @return string The Detail's detail1
+	 * The descroiption
+	 * @var string
 	 */
-	public function getDetail1() {
-		return $this->detail1;
-	}
+	protected $description;
 
 	/**
-	 * Sets this Detail's detail1
-	 *
-	 * @param string $detail1 The Detail's detail1
+	 * The detail2
+	 * @var float
+	 */
+	protected $amount;
+
+	/**
+	 * @param float $amount
 	 * @return void
 	 */
-	public function setDetail1($detail1) {
-		$this->detail1 = $detail1;
+	public function setAmount($amount) {
+		$this->amount = $amount;
 	}
 
 	/**
-	 * Get the Detail's detail2
-	 *
-	 * @return string The Detail's detail2
+	 * @return float
 	 */
-	public function getDetail2() {
-		return $this->detail2;
+	public function getAmount() {
+		return $this->amount;
 	}
 
 	/**
-	 * Sets this Detail's detail2
+	 * Get the Detail's description
 	 *
-	 * @param string $detail2 The Detail's detail2
+	 * @return string The Description's detail
+	 */
+	public function getDescription() {
+		return $this->description;
+	}
+
+	/**
+	 * Sets this Detail's detail
+	 *
+	 * @param string $description The Detail's description
 	 * @return void
 	 */
-	public function setDetail2($detail2) {
-		$this->detail2 = $detail2;
+	public function setDescription($description) {
+		$this->description = $description;
 	}
+
+
 	/**
 	 * @param return \WL\Test\Domain\Model\Master $master
 	 * @return void

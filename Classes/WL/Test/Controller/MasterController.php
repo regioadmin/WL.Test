@@ -32,6 +32,32 @@ class MasterController extends ActionController {
 	protected $detailRepository;
 
 	/**
+	 * @Flow\Inject
+	 * @var \TYPO3\Flow\Persistence\PersistenceManagerInterface
+	 */
+	protected $persistenceManager;
+
+
+
+
+
+
+  	/**
+	 * init an action
+	 *
+	 * @return void
+	 */
+	public function initializeAction() {
+    foreach ($this->arguments as $argument) {
+$argument->getPropertyMappingConfiguration()->forProperty('detail.*')->setTypeConverterOption(
+	'TYPO3\Flow\Property\TypeConverter\FloatConverter', 'locale', TRUE );
+   }
+
+	}
+
+
+
+	/**
 	 * Shows a list of masters
 	 *
 	 * @return void
@@ -40,15 +66,6 @@ class MasterController extends ActionController {
 		$this->view->assign('masters', $this->masterRepository->findAll());
 	}
 
-	/**
-	 * Shows a single master object
-	 *
-	 * @param \WL\Test\Domain\Model\Master $master The master to show
-	 * @return void
-	 */
-	public function showAction(Master $master) {
-		$this->view->assign('master', $master);
-	}
 
 	/**
 	 * Shows a form for creating a new master object
@@ -80,17 +97,17 @@ class MasterController extends ActionController {
 	 * Shows a form for editing an existing master object
 	 *
 	 * @param \WL\Test\Domain\Model\Master $master
-	 * @param \WL\Test\Domain\Model\Detail $detail
 	 * @return void
 	 */
-	public function editAction(\WL\Test\Domain\Model\Master $master, \WL\Test\Domain\Model\Detail $detail) {
+	public function editAction(\WL\Test\Domain\Model\Master $master) {
+
+        $detail=$this->detailRepository->findOneByMaster($master);
 
 
-		$masterAndDetail = new \WL\Test\Domain\Dto\Masterdetaildto($master, $detail);
-		$masterAndDetail->setMaster($master);
-		$masterAndDetail->setDetail($detail);
+		$masterAndDetail = new \WL\Test\Domain\Dto\Masterdetaildto($master,$detail);
+		//$masterAndDetail->setMaster($master);
+		//$masterAndDetail->setDetail($detail);
 
-		\TYPO3\FLOW\var_dump($masterAndDetail);
 		$this->view->assign('masterAndDetail', $masterAndDetail);
 
 
@@ -100,19 +117,35 @@ class MasterController extends ActionController {
 	 * Updates the given master object
 	 *
 	 * @param \WL\Test\Domain\Dto\Masterdetaildto $masterAndDetail
+	 * @param array $master_id
+	 * @param array $detail_id
 	 * @return void
 	 */
-	public function updateAction(\WL\Test\Domain\Dto\Masterdetaildto $masterAndDetail) {
+	public function updateAction(\WL\Test\Domain\Dto\Masterdetaildto $masterAndDetail,$master_id,$detail_id) {
+		//$this->persistenceManager->persistAll();
 
+		//\TYPO3\FLOW\var_dump($masterAndDetail); ==> PROBLEM is that identifiers from both models were changed when validation error
+//die(var_dump($id1));
 
+		$modelMaster=$masterAndDetail->getMaster();
 		$modelDetail=$masterAndDetail->getDetail();
+
+/*
+		\TYPO3\FLOW\var_dump($masterAndDetail);
+		\TYPO3\FLOW\var_dump($modelMaster);
 		\TYPO3\FLOW\var_dump($modelDetail);
+		die("");
+
+*/
+
+		$modelMaster->setIdentifier($master_id["__identity"]);
+		$modelDetail->setIdentifier($detail_id["__identity"]);
+
+
+
+		$this->masterRepository->update($modelMaster);
 		$this->detailRepository->update($modelDetail);
 
-		$modelMaster= new \WL\Test\Domain\Model\Master;
-		$modelMaster=$masterAndDetail->getMaster();
-		\TYPO3\FLOW\var_dump($modelMaster);
-		$this->masterRepository->update($modelMaster);
 
 		$this->redirect('index');
 	}

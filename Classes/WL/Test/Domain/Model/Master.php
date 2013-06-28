@@ -23,13 +23,7 @@ class Master {
 	protected $name;
 
 
-	/**
-	 * The detail contained in this master
-	 *
-	 * @var \WL\Test\Domain\Model\Detail
-	 * @ORM\OneToMany(mappedBy="master", cascade={"remove"})
-	 */
-	protected $detail;
+
 
 
 	/**
@@ -51,20 +45,7 @@ class Master {
 		$this->name = $name;
 	}
 
-	/**
-	 * @param return \WL\Test\Domain\Model\Detail $detail
-	 * @return void
-	 */
-	public function setDetail(\WL\Test\Domain\Model\Detail $detail) {
-		$this->detail = $detail;
-	}
 
-	/**
-	 * @return \WL\Test\Domain\Model\Detail $detail
-	 */
-	public function getDetail() {
-		return $this->detail;
-	}
 
 }
 ?>
