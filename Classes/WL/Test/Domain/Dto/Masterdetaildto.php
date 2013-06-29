@@ -19,7 +19,7 @@ class Masterdetaildto {
 	/**
 	 * Get the Mastere's master
 	 *
-	 * @return \WL\Komsis\Domain\Model\Master
+	 * @return \WL\Tet\Domain\Model\Master
 	 */
 	public function getMaster() {
 		return $this->master;
